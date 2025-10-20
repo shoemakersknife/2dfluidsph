@@ -23,16 +23,17 @@
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
 
-  const NUM_PARTICLES = 300;
+  const NUM_PARTICLES = 1000;
   const PARTICLE_RADIUS = 5;
 
   // SPH parameters
-  const h = 0.05; // smoothing radius in normalized coords
+  const h = 0.06; // smoothing radius in normalized coords
   const mass = 1;
-  const restDensity = 2000;
-  const stiffness = 2000;
+  const restDensity = 1000;
+  const stiffness = 8000;
   const viscosity = 10000;
   const gravity = 0; // pixels/s^2 approx
+    const damping = 0.98;
 
   // Time step in seconds
   const dt = 0.0001;
@@ -119,6 +120,29 @@
     }
   }
 
+  function applyRepulsion() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const pi = particles[i];
+      const pj = particles[j];
+      const dx = pj.x - pi.x;
+      const dy = pj.y - pi.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      const minDist = 0.015; // target spacing
+      if (dist < minDist && dist > 0) {
+        const overlap = minDist - dist;
+        const pushX = (dx / dist) * overlap * 0.5;
+        const pushY = (dy / dist) * overlap * 0.5;
+        pi.x -= pushX;
+        pi.y -= pushY;
+        pj.x += pushX;
+        pj.y += pushY;
+      }
+    }
+  }
+}
+
+
   function computeForces() {
     for(let i=0; i<NUM_PARTICLES; i++) {
       let pi = particles[i];
@@ -171,6 +195,8 @@
     for(let p of particles) {
       p.vx += p.ax * dt;
       p.vy += p.ay * dt;
+      p.vx *= damping;
+      p.vy *= damping;
       p.x += p.vx * dt;
       p.y += p.vy * dt;
 
@@ -208,6 +234,7 @@
     computeDensityPressure();
     computeForces();
     integrate();
+    applyRepulsion();
     draw();
     requestAnimationFrame(loop);
   }
