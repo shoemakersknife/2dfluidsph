@@ -1,1 +1,1 @@
-# not quite a fluid simulation
+# 2D fluid simulation (SPH model)
