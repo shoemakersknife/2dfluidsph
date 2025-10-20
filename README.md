@@ -1,1 +1,1 @@
-# 2Dfluid
+# not quite a fluid simulation
