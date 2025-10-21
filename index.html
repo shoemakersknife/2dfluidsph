@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>SPH Fluid Simulation</title>
+  <title>WebGL SPH Fluid Simulation</title>
   <style>
     body {
       margin: 0;
@@ -33,7 +33,7 @@
   </style>
 </head>
 <body>
-<canvas id="canvas" width="800" height="800"></canvas>
+<canvas id="canvas" width="500" height="500"></canvas>
 <div class="info">
   Particles: <span id="particleCount">1000</span><br>
   FPS: <span id="fps">0</span>
@@ -274,6 +274,8 @@
   }
 
   function integrate() {
+    const boundaryMargin = 0.1; // 1% margin from edges
+    
     for (let p of particles) {
       p.vx += p.ax * dt;
       p.vy += p.ay * dt;
@@ -282,20 +284,20 @@
       p.x += p.vx * dt;
       p.y += p.vy * dt;
 
-      if (p.x < PARTICLE_RADIUS / canvas.width) {
-        p.x = PARTICLE_RADIUS / canvas.width;
+      if (p.x < boundaryMargin) {
+        p.x = boundaryMargin;
         p.vx *= -0.5;
       }
-      if (p.x > 1 - PARTICLE_RADIUS / canvas.width) {
-        p.x = 1 - PARTICLE_RADIUS / canvas.width;
+      if (p.x > 1 - boundaryMargin) {
+        p.x = 1 - boundaryMargin;
         p.vx *= -0.5;
       }
-      if (p.y < PARTICLE_RADIUS / canvas.height) {
-        p.y = PARTICLE_RADIUS / canvas.height;
+      if (p.y < boundaryMargin) {
+        p.y = boundaryMargin;
         p.vy *= -0.5;
       }
-      if (p.y > 1 - PARTICLE_RADIUS / canvas.height) {
-        p.y = 1 - PARTICLE_RADIUS / canvas.height;
+      if (p.y > 1 - boundaryMargin) {
+        p.y = 1 - boundaryMargin;
         p.vy *= -0.5;
       }
     }
@@ -358,9 +360,8 @@
   }
 
   window.addEventListener('resize', () => {
-    const size = Math.min(window.innerWidth - 40, window.innerHeight - 40, 800);
-    canvas.width = size;
-    canvas.height = size;
+    canvas.width = 500;
+    canvas.height = 500;
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.uniform2f(resolutionUniform, canvas.width, canvas.height);
   });
