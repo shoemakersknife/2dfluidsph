@@ -2,25 +2,24 @@
   const canvas = document.getElementById('canvas');
 
   const overlayCanvas = document.getElementById('overlay');
-const overlayCtx = overlayCanvas.getContext('2d');
+  const overlayCtx = overlayCanvas.getContext('2d');
 
-function drawOverlay() {
-  overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
-  overlayCtx.beginPath();
-  overlayCtx.arc(mouse.x * overlayCanvas.width, mouse.y * overlayCanvas.height, 10, 0, 2 * Math.PI);
-  overlayCtx.strokeStyle = mouse.leftDown ? 'lime' : mouse.rightDown ? 'red' : 'gray';
-  overlayCtx.lineWidth = 2;
-  overlayCtx.stroke();
+  function drawOverlay() {
+    overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+    overlayCtx.beginPath();
+    overlayCtx.arc(mouse.x * overlayCanvas.width, mouse.y * overlayCanvas.height, 10, 0, 2 * Math.PI);
+    overlayCtx.strokeStyle = mouse.leftDown ? 'lime' : mouse.rightDown ? 'red' : 'gray';
+    overlayCtx.lineWidth = 2;
+    overlayCtx.stroke();
 }
 
-
-  let mouse = handMouse;
+let mouse = handMouse;
 
 
 canvas.addEventListener('contextmenu', e => e.preventDefault());
 
-    canvas.addEventListener('mousemove', e => {
- const rect = canvas.getBoundingClientRect();
+  canvas.addEventListener('mousemove', e => {
+  const rect = canvas.getBoundingClientRect();
   mouse.x = (e.clientX - rect.left) / canvas.width;
   mouse.y = (e.clientY - rect.top) / canvas.height;
   });
