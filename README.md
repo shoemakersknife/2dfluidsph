@@ -1,3 +1,3 @@
-# 2D fluid simulation (SPH model)
+# ML-Powered Interactive Fluid Simulation
 
-# shoemakersknife.github.io/2dfluidsph
+# shoemakersknife.github.io/fluidvision
