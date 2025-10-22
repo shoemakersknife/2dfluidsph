@@ -35,7 +35,6 @@ hands.onResults((results) => {
   const middle = landmarks[12];
   const ring = landmarks[16];
   const pinky = landmarks[20];
-
   const dx = thumb.x - index.x;
   const dy = thumb.y - index.y;
   const dz = thumb.z - index.z;
