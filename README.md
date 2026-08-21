@@ -2,7 +2,7 @@
 
 [Live Demo](https://shoemakersknife.github.io/FluidVision/)
 
-a human-computer interaction project involving fluid physics.
+a human-computer interaction project involving fluid physics and computer vision.
 
 - Interactive WebGL rendered fluid simulation with real-time ML hand detection and tracking.
 - MediaPipe for hand gesture recognition.
