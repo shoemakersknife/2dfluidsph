@@ -2,7 +2,7 @@
 
 [Live Demo](https://shoemakersknife.github.io/FluidVision/)
 
-MechE loves fluids. I turned fluid physics into a human-computer interaction project. 
+a human-computer interaction project involving fluid physics.
 
 - Interactive WebGL rendered fluid simulation with real-time ML hand detection and tracking.
 - MediaPipe for hand gesture recognition.
