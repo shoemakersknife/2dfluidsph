@@ -1,6 +1,6 @@
 # Interactive Fluid Simulation + Hand Gesture Recognition
 
-[Live Demo](https://shoemakersknife.github.io/FluidVision/)
+[Live Demo](https://shoemakersknife.github.io/fluid-vision/)
 
 a human-computer interaction project involving fluid physics and computer vision.
 
